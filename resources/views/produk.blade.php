@@ -19,6 +19,8 @@
                         <input type="text" class="form-control" name="nama" id="nama">
                         <label>Foto Produk</label>
                         <input type="file" class="form-control" name="foto" id="foto">
+                        <img class="img img-fluid img-thumbnail" style="max-height:250px;" id="preview">
+                        <br>
                         <label>Deskripsi Produk</label>
                         <input type="text" class="form-control" name="desc" id="desc">
                         <label>Harga Produk</label>
@@ -60,13 +62,13 @@
                 @foreach ($datas as $d)
                     <p hidden id="id{{ $d->id }}">{{ $d->id }}</p>
                     <p hidden id="nama{{ $d->id }}">{{ $d->ProdukNama }}</p>
-                    <p hidden id="foto{{ $d->id }}">{{ $d->ProdukFoto }}</p>
+                    <p hidden id="foto{{ $d->id }}">{{ url('storage/' . $d->ProdukFoto) }}</p>
                     <p hidden id="desc{{ $d->id }}">{{ $d->ProdukDesc }}</p>
                     <p hidden id="harga{{ $d->id }}">{{ $d->ProdukHarga }}</p>
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
-                        <td><img src="{{ $d->ProdukFoto }}" class="img img-fluid img-thumbnail value-img"
-                                style="max-height: 75px"></td>
+                        <td><img src="{{url('storage/' . $d->ProdukFoto) }}" class="img img-fluid img-thumbnail value-img"
+                                style="max-height: 75px" alt="Foto Produk"></td>
                         <td>{{ $d->ProdukNama }}</td>
                         <td>{{ $d->ProdukDesc }}</td>
                         <td>Rp. {{ number_format($d->ProdukHarga, 0, '', '.') }}</td>
@@ -82,9 +84,8 @@
                         <td>{{ $d->ProdukWP }}</td>
                         <td>
                             <button type="button" class="btn" onclick="edits({{ $d->id }})" data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button>|
-                            <a href="/produk-publish?id={{ $d->id }}"><i class="fas fa-eye text-success"></i></a> |
-                            <a href="/produk-archive?id={{ $d->id }}"><i
-                                    class="fas fa-eye-slash text-danger"></i></a>
+                            <a href="{{$d->ProdukStatus ==  1 ? '#' : '/produk-publish?id='. $d->id }}"><i class="fas fa-eye text-success"></i></a> |
+                            <a href="{{$d->ProdukStatus ==  2 ? '#' : '/produk-publish?id='. $d->id }}"><i class="fas fa-eye-slash text-danger"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -98,18 +99,34 @@
             $('#forms').prop('action', 'produk-update');
             $('#id').val($('#id' + i).text());
             $('#nama').val($('#nama' + i).text());
-            //$('#foto').val($('#foto' + i).text());
             $('#desc').val($('#desc' + i).text());
             $('#harga').val($('#harga' + i).text());
+            $('#preview').prop('src', $('#foto' + i).text());
         }
 
         function create() {
             $('#forms').prop('action', 'produk-store');
             $('#id').val('');
             $('#nama').val('');
-            //$('#foto').val('');
+            $('#preview').prop('src', '');
             $('#desc').val('');
             $('#harga').val('');
         }
+
+        function readUrl(input){
+            if (input.files && input.files[0]){
+                var reader = new FileReader();
+
+                reader.onload = function(e){
+                    $('#preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#foto').change(function(){
+            readUrl(this);
+        });
+
     </script>
 @endsection

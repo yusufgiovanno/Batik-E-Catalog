@@ -158,8 +158,9 @@
                                 <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
                                     <div class="service h-100">
                                         <h4 class="text-primary">{{ $d->ProdukNama }}</h4>
-                                        <img src="{{ $d->ProdukFoto }}" class="img img-fluid img-thumbnail mids value-img" style="height:275px"
+                                        <img src="{{url('storage/' . $d->ProdukFoto) }}" class="img img-fluid img-thumbnail mids value-img" style="height:275px"
                                         data-action="zoom" data-original="{{$d->ProdukFoto}}">
+                                        <h6>&nbsp; Rp. {{number_format($d->ProdukHarga, 0, '','.')}}</h6>
                                         <p class="text-center">{{ $d->ProdukDesc }}.</p>
                                     </div>
                                 </div>

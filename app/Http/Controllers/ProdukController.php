@@ -32,7 +32,10 @@ class ProdukController extends Controller
 
     public function index()
     {
-        $datas = produk::paginate(6);
+        $datas = produk::where('ProdukStatus', 1)
+        ->orderBy('ProdukWP', 'DESC')
+        ->orderBy('updated_at', 'DESC')
+        ->paginate(6);
 
         return view('index', [
             'datas' => $datas
@@ -41,16 +44,30 @@ class ProdukController extends Controller
 
     public function create()
     {
-        $datas = produk::all();
+        $datas = produk::orderBy('id', 'DESC')->get();
 
         return view('produk', [
             'datas' => $datas
         ]);
     }
 
-    public function store(StoreprodukRequest $request)
+    public function store(StoreprodukRequest $r)
     {
-        //
+        $prod = new produk();
+
+        $prod->ProdukNama   = $r->nama;
+        $prod->ProdukHarga  = $r->harga;
+        $prod->ProdukDesc   = $r->desc;
+        $prod->ProdukStatus = 0;
+
+        if(isset($r->foto)){
+            $prod->ProdukFoto = 'Produk/' . $r->id . '.jpg';
+            $r->file('foto')->storeAs('public/Produk', $r->id . '.jpg');
+        }
+
+        $prod->save();
+
+        return redirect('/produk');
     }
 
     public function show(produk $produk)
@@ -63,13 +80,21 @@ class ProdukController extends Controller
         //
     }
 
-    public function update(UpdateprodukRequest $request, produk $produk)
+    public function update(UpdateprodukRequest $r)
     {
-        //
-    }
+        $prod = produk::find($r->id);
 
-    public function destroy(produk $produk)
-    {
-        //
+        $prod->ProdukNama  = $r->nama;
+        $prod->ProdukHarga = $r->harga;
+        $prod->ProdukDesc  = $r->desc;
+
+        if(isset($r->foto)){
+            $prod->ProdukFoto = 'Produk/' . $r->id . '.jpg';
+            $r->file('foto')->storeAs('public/Produk', $r->id . '.jpg');
+        }
+
+        $prod->save();
+
+        return redirect('/produk');
     }
 }

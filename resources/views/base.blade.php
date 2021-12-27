@@ -50,7 +50,6 @@
         @yield('content')
     </div>
 
-    @include('footer')
     </div>
 
     <script src="../js/zooming.min.js"></script>

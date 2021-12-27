@@ -16,8 +16,13 @@ use App\Http\Controllers\ProdukController;
 |
 */
 
-Route::post('/pesan',          [PesanController::class,  'store']);
-Route::get ('/',               [ProdukController::class, 'index']);
-Route::get ('/produk',         [ProdukController::class, 'create']);
+Route::get ('/',               [ProdukController::class, 'index'  ]);
+Route::post('/pesan',          [PesanController::class,  'store'  ]);
+
+Route::get ('/produk',         [ProdukController::class, 'create' ]);
 Route::get ('/produk-publish', [ProdukController::class, 'publish']);
 Route::get ('/produk-archive', [ProdukController::class, 'archive']);
+Route::post('/produk-update',  [ProdukController::class, 'update' ]);
+Route::post('/produk-store',   [ProdukController::class, 'store'  ]);
+
+Route::get ('/settings',       [ProdukController::class, 'create' ]);

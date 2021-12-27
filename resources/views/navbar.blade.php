@@ -3,8 +3,8 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-6 col-md-4">
-                    <h1 class="my-0 site-logo"><a href="/">Batik<span class="text-primary">.</span>
-                        </a></h1>
+                    <h1 class="my-0 site-logo"><b href="/">Admin<span class="text-primary">.</span>
+                        </b></h1>
                 </div>
                 <div class="col-6 col-md-8">
                     <nav class="site-navigation text-right" role="navigation">
@@ -16,11 +16,10 @@
                                 </a></div>
 
                             <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                                <li><a class="nav-link">Masuk</a></li>
-                                <li><a href="#home-section" class="nav-link">Beranda</a></li>
-                                <li><a href="#about-section" class="nav-link">Tentang Kami</a></li>
-                                <li><a href="#what-we-do-section" class="nav-link">Katalog</a></li>
-                                <li><a href="#contact-section" class="nav-link">Hubungi Kami</a></li>
+                                <li><a href="/" class="nav-link">Beranda</a></li>
+                                <li><a href="/produk" class="nav-link">Produk</a></li>
+                                <li><a href="/settings" class="nav-link">Pengaturan</a></li>
+                                <li><a href="/logout" class="nav-link">Keluar</a></li>
                             </ul>
                         </div>
                     </nav>
