@@ -24,11 +24,130 @@
             margin-left: auto;
             margin-right: auto;
         }
+
+        .resvid {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin: auto
+        }
+
+        .resvid iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%
+        }
+
+        .resvid.alt {
+            width: 35%;
+            padding-bottom: 62.22%
+        }
+
+        .resvid.square {
+            width: 70%;
+            padding-bottom: 70%
+        }
+
+        .resvid.old {
+            width: 80%;
+            padding-bottom: 60%
+        }
+
+        @media screen and (max-width:1000px) {
+            .resvid.alt {
+                width: 50%;
+                padding-bottom: 88.89%
+            }
+
+            .resvid.old {
+                padding-bottom: 75%
+            }
+        }
+
+        @media screen and (max-width:600px) {
+            .resvid.alt {
+                width: 100%;
+                padding-bottom: 177.78%
+            }
+
+            .resvid.square {
+                width: 100%;
+                padding-bottom: 100%
+            }
+        }
+
+        .resvid .video-sticker.sticked {
+            position: fixed;
+            width: 250px;
+            height: 140.63px;
+            bottom: 66%;
+            left: 82%;
+            z-index: 2000
+        }
+
+        .resvid.alt .video-sticker.sticked {
+            height: 444.44px;
+            max-height: 80vh
+        }
+
+        .resvid.square .video-sticker.sticked {
+            height: 250px
+        }
+
+        .video-sticker-remover {
+            display: none;
+            position: absolute;
+            top: -30px;
+            right: 0;
+            font-size: 20px;
+            height: 20px;
+        }
+
+        .video-sticker.sticked .video-sticker-remover {
+            display: block;
+            cursor: pointer
+        }
+
+        .video-sticker-remover::before {
+            content: "\00d7"
+        }
+
     </style>
 
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+    <!-- The Modal -->
+<div class="modal" id="myModal">
+    <form method="post" action="/login">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Masuk</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+            @csrf
+            <div class="container">
+                <label>Username</label>
+                <input type="text" class="form-control" name="username">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+        </div>
+
+        <div class="modal-footer d-flex justify-content-center">
+            <button type="button" class="btn rounded-0 btn-danger" data-dismiss="modal">Batal</button>
+            <button type="submit" class="btn rounded-0 btn-primary">Masuk</button>
+        </div>
+
+      </div>
+    </div>
+</form>
+  </div>
 
     <div class="site-wrap">
 
@@ -47,7 +166,8 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-6 col-md-4">
-                            <h1 class="my-0 site-logo"><a href="index.html">Zakiyah Batik<span class="text-primary">.</span>
+                            <h1 class="my-0 site-logo"><a href="index.html">Zakiyah Batik<span
+                                        class="text-primary">.</span>
                                 </a></h1>
                         </div>
                         <div class="col-6 col-md-8">
@@ -60,7 +180,7 @@
                                         </a></div>
 
                                     <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                                        <li><a class="nav-link">Masuk</a></li>
+                                        <li><a class="nav-link" data-toggle="modal" data-target="#myModal">Masuk</a></li>
                                         <li><a href="#home-section" class="nav-link">Beranda</a></li>
                                         <li><a href="#about-section" class="nav-link">Tentang Kami</a></li>
                                         <li><a href="#what-we-do-section" class="nav-link">Katalog</a></li>
@@ -78,16 +198,13 @@
             <div class="img-wrap">
                 <div class="owl-carousel slide-one-item hero-slider">
                     <div class="slide overlay">
-                        {{-- <img src="../images/hero_1.jpg" alt="Image" class="img-fluid"> --}}
-                        <img src="https://wallpaperaccess.com/full/22033.jpg" alt="Image" class="img-fluid">
+                        <img src="{{ url('/storage/Slides/1.jpg') }}" alt="Image" class="img-fluid">
                     </div>
                     <div class="slide overlay">
-                        <img src="https://as1.ftcdn.net/v2/jpg/02/71/41/12/1000_F_271411231_rYhlOk7AcBsFr718KxTqC0K3ymX29ufr.jpg"
-                            alt="Image" class="img-fluid">
+                        <img src="{{ url('/storage/Slides/2.jpg') }}" alt="Image" class="img-fluid">
                     </div>
                     <div class="slide overlay">
-                        <img src="https://as2.ftcdn.net/v2/jpg/02/45/07/39/1000_F_245073920_oPSKfeVINyShxEacS9r1BWRgpLFbUDJ9.jpg"
-                            alt="Image" class="img-fluid">
+                        <img src="{{ url('/storage/Slides/3.jpg') }}" alt="Image" class="img-fluid">
                     </div>
                 </div>
             </div>
@@ -111,30 +228,52 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 mb-5">
-                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d959ace7-2880-4262-a8cd-0a635711d093/dw4bae-f5915c68-3525-4db5-a5b6-eb24d6a969c2.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Q5NTlhY2U3LTI4ODAtNDI2Mi1hOGNkLTBhNjM1NzExZDA5M1wvZHc0YmFlLWY1OTE1YzY4LTM1MjUtNGRiNS1hNWI2LWViMjRkNmE5NjljMi5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.KeWqZZ3A7iA8P-y3zSPN3fOz4WlwzfVkfmnKuaKM_y0"
-                            alt="Image" class="img-fluid">
+                        <img src="{{ url('/storage/Slides/4.jpg') }}" alt="Image" class="img-fluid">
                     </div>
                     <div class="col-lg-5 ml-auto section-title">
                         <span class="sub-title mb-2 d-block">Tentang Kami</span>
-                        <h2 class="title text-primary mb-3">Studio Batik Nusantara.</h2>
-                        <p class="mb-4">Sebuah studio batik yang berlokasikan di Kota Malang, Jawa Timur
-                            dengan komitmen untuk memberi kualitas batik terbaik.</p>
+                        <h2 class="title text-primary mb-3">Zakiyah Batik.</h2>
+                        <p class="mb-4">{{ $set->Tentang }}</p>
 
 
                         <div class="d-flex">
-                            <ul class="list-unstyled ul-check success mr-5">
-                                <li>Baju</li>
-                                <li>Kain</li>
-                                <li>Jaket</li>
-                                <li>Kemeja</li>
-                                <li>Sarung</li>
-                                <li>Kebaya</li>
-                            </ul>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <ul class="list-unstyled ul-check success mr-5">
+                                        <li>Baju</li>
+                                        <li>Kain</li>
+                                        <li>Jaket</li>
+                                        <li>Kemeja</li>
+                                        <li>Sarung</li>
+                                        <li>Kebaya</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-9">
+                                    <iframe src="https://www.youtube.com/embed/{{$set->Video}}" frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </div>
                         </div>
-                        <p><a data-fancybox data-ratio="2" href="https://vimeo.com/326176805"
-                                class="d-flex align-items-center"><span
-                                    class="icon-play_circle_outline h4 m-0 mr-2"></span> <span>Galeri
-                                    Instagram</span></a></p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>
+                                    <a data-fancybox data-ratio="2" href="{{ $set->LinkFacebook }}"
+                                        class="d-flex align-items-center"><span
+                                            class="icon-facebook h4 m-0 mr-2"></span>
+                                        <span>{{ $set->Facebook }}</span>
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    <a data-fancybox data-ratio="2" href="{{ $set->LinkInstagram }}"
+                                        class="d-flex align-items-center"><span
+                                            class="icon-instagram h4 m-0 mr-2"></span>
+                                        <span>{{ $set->Instagram }}</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -148,7 +287,8 @@
                         <h5 class=" text-primary">Daftar Koleksi Batik Kami</h5>
                     </div>
                     <div class="col-lg-6 section-title">
-                        <input type="text" class="form-control bg-white" placeholder="Pencarian .." style="margin-top:25px;">
+                        <input type="text" class="form-control bg-white" placeholder="Pencarian .."
+                            style="margin-top:25px;">
                     </div>
                 </div>
                 <div class="row">
@@ -158,9 +298,18 @@
                                 <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
                                     <div class="service h-100">
                                         <h4 class="text-primary">{{ $d->ProdukNama }}</h4>
-                                        <img src="{{url('storage/' . $d->ProdukFoto) }}" class="img img-fluid img-thumbnail mids value-img" style="height:275px"
-                                        data-action="zoom" data-original="{{url('storage/' . $d->ProdukFoto) }}">
-                                        <h6>&nbsp; Rp. {{number_format($d->ProdukHarga, 0, '','.')}}</h6>
+                                        <img src="{{ url('storage/' . $d->ProdukFoto) }}"
+                                            class="img img-fluid img-thumbnail mids value-img" style="height:275px"
+                                            data-action="zoom"
+                                            data-original="{{ url('storage/' . $d->ProdukFoto) }}">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h6 class="text-center">Kode : {{ $d->ProdukKode }}</h6>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6>&nbsp; Rp. {{ number_format($d->ProdukHarga, 0, '', '.') }}</h6>
+                                            </div>
+                                        </div>
                                         <p class="text-center">{{ $d->ProdukDesc }}.</p>
                                     </div>
                                 </div>
@@ -318,7 +467,53 @@
     <script src="../js/main.js"></script>
     <script>
         new Zooming().listen('img')
-      </script>
+
+        //wrapper
+        Array.from(document.querySelectorAll("iframe")).forEach(function(a) {
+            const r = a.width / a.height,
+                reswrapper = document.createElement("div");
+
+            reswrapper.classList.add("resvid",
+                    `${9 / 16 === r ? "alt" : 4 / 3 === r ? "old" : r === 1 && "square"}`),
+                a.parentElement.insertBefore(reswrapper, a);
+            reswrapper.appendChild(a)
+        })
+
+        //sticker
+        const youtubevid = document.getElementsByClassName("resvid"),
+            notsticker = document.getElementsByClassName("not-sticker");
+
+        function sticker() {
+            const sticker = document.getElementsByClassName("video-sticker")[0],
+                scrolltop = window.scrollY;
+            let offsettop;
+
+            1 === youtubevid.length && 0 === notsticker.length && (
+                offsettop = youtubevid[0].offsetTop,
+                offsettop + youtubevid[0].offsetHeight > scrolltop && scrolltop + window.innerHeight > offsettop ?
+                sticker.classList.remove("sticked") : sticker.classList.add("sticked")
+            );
+        }
+
+        window.addEventListener("scroll", sticker);
+        document.addEventListener("DOMContentLoaded", function() {
+            const iframe = document.getElementsByClassName("resvid")[0].getElementsByTagName("iframe")[0],
+                wrapper = document.createElement("div"),
+                remover = document.createElement("div");
+
+            1 === youtubevid.length && 0 === notsticker.length && (
+                    wrapper.className = "video-sticker",
+                    remover.className = "video-sticker-remover",
+                    remover.addEventListener("click", function(a) {
+                        a.parentNode.removeAttribute("class")
+                    }),
+                    iframe.parentNode.insertBefore(wrapper, iframe),
+                    wrapper.appendChild(iframe),
+                    wrapper.appendChild(remover)
+                ),
+                sticker()
+        });
+    </script>
 
 
 </body>

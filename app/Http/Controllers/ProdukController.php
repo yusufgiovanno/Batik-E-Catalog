@@ -6,6 +6,7 @@ use App\Http\Requests\StoreprodukRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateprodukRequest;
 use App\Models\produk;
+use App\Models\Setting;
 use Illuminate\Support\Carbon;
 
 class ProdukController extends Controller
@@ -36,8 +37,11 @@ class ProdukController extends Controller
         ->orderBy('updated_at', 'DESC')
         ->paginate(24);
 
+        $set = Setting::find(1);
+
         return view('index', [
-            'datas' => $datas
+            'datas' => $datas,
+            'set'   => $set
         ]);
     }
 
@@ -57,6 +61,7 @@ class ProdukController extends Controller
         $prod->ProdukNama   = $r->nama;
         $prod->ProdukHarga  = $r->harga;
         $prod->ProdukDesc   = $r->desc;
+        $prod->ProdukKode   = $r->kode;
         $prod->ProdukStatus = 0;
 
         if(isset($r->foto)){
@@ -83,9 +88,10 @@ class ProdukController extends Controller
     {
         $prod = produk::find($r->id);
 
-        $prod->ProdukNama  = $r->nama;
-        $prod->ProdukHarga = $r->harga;
-        $prod->ProdukDesc  = $r->desc;
+        $prod->ProdukNama   = $r->nama;
+        $prod->ProdukHarga  = $r->harga;
+        $prod->ProdukDesc   = $r->desc;
+        $prod->ProdukKode   = $r->kode;
 
         if(isset($r->foto)){
             $prod->ProdukFoto = 'Produk/' . $r->id . '.jpg';

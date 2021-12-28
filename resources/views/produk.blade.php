@@ -15,6 +15,8 @@
                     <div class="modal-body">
                         @csrf
                         <input type="hidden" name="id" id="id">
+                        <label>Kode Produk</label>
+                        <input type="text" class="form-control" name="kode" id="kode">
                         <label>Nama Produk</label>
                         <input type="text" class="form-control" name="nama" id="nama">
                         <label>Foto Produk</label>
@@ -65,6 +67,7 @@
                     <p hidden id="foto{{ $d->id }}">{{ url('storage/' . $d->ProdukFoto) }}</p>
                     <p hidden id="desc{{ $d->id }}">{{ $d->ProdukDesc }}</p>
                     <p hidden id="harga{{ $d->id }}">{{ $d->ProdukHarga }}</p>
+                    <p hidden id="kode{{ $d->id }}">{{ $d->ProdukKode }}</p>
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
                         <td><img src="{{url('storage/' . $d->ProdukFoto) }}" class="img img-fluid img-thumbnail value-img"
@@ -101,6 +104,7 @@
             $('#nama').val($('#nama' + i).text());
             $('#desc').val($('#desc' + i).text());
             $('#harga').val($('#harga' + i).text());
+            $('#kode').val($('#kode' + i).text());
             $('#preview').prop('src', $('#foto' + i).text());
         }
 
@@ -111,6 +115,7 @@
             $('#preview').prop('src', '');
             $('#desc').val('');
             $('#harga').val('');
+            $('#kode').val('');
         }
 
         function readUrl(input){

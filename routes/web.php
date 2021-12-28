@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\SettingController;
 
 
 /*
@@ -25,4 +26,5 @@ Route::get ('/produk-archive', [ProdukController::class, 'archive']);
 Route::post('/produk-update',  [ProdukController::class, 'update' ]);
 Route::post('/produk-store',   [ProdukController::class, 'store'  ]);
 
-Route::get ('/settings',       [ProdukController::class, 'create' ]);
+Route::get ('/settings',       [SettingController::class, 'index' ]);
+Route::post('/settings',       [SettingController::class, 'update' ]);
