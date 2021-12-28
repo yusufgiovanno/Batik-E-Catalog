@@ -85,7 +85,7 @@
                         <td>
                             <button type="button" class="btn" onclick="edits({{ $d->id }})" data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button>|
                             <a href="{{$d->ProdukStatus ==  1 ? '#' : '/produk-publish?id='. $d->id }}"><i class="fas fa-eye text-success"></i></a> |
-                            <a href="{{$d->ProdukStatus ==  2 ? '#' : '/produk-publish?id='. $d->id }}"><i class="fas fa-eye-slash text-danger"></i></a>
+                            <a href="{{$d->ProdukStatus ==  2 ? '#' : '/produk-archive?id='. $d->id }}"><i class="fas fa-eye-slash text-danger"></i></a>
                         </td>
                     </tr>
                 @endforeach

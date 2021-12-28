@@ -47,7 +47,7 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-6 col-md-4">
-                            <h1 class="my-0 site-logo"><a href="index.html">Batik<span class="text-primary">.</span>
+                            <h1 class="my-0 site-logo"><a href="index.html">Zakiyah Batik<span class="text-primary">.</span>
                                 </a></h1>
                         </div>
                         <div class="col-6 col-md-8">
@@ -96,10 +96,10 @@
                     <div class="col-md-8 align-self-center">
                         <div class="intro">
                             <div class="heading">
-                                <h1>Batik Studio</h1>
+                                <h1>Zakiyah <small>Batik</small></h1>
                             </div>
                             <div class="text">
-                                <p class="sub-text mb-5">Sebuah studio batik di Kota Malang, Jawa Timur, Indonesia.</p>
+                                <p class="sub-text mb-5">Khas Batik Madura.</p>
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 mb-5">
                         <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d959ace7-2880-4262-a8cd-0a635711d093/dw4bae-f5915c68-3525-4db5-a5b6-eb24d6a969c2.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Q5NTlhY2U3LTI4ODAtNDI2Mi1hOGNkLTBhNjM1NzExZDA5M1wvZHc0YmFlLWY1OTE1YzY4LTM1MjUtNGRiNS1hNWI2LWViMjRkNmE5NjljMi5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.KeWqZZ3A7iA8P-y3zSPN3fOz4WlwzfVkfmnKuaKM_y0"
-                            alt="Image" class="img-fluid" class="img-fluid">
+                            alt="Image" class="img-fluid">
                     </div>
                     <div class="col-lg-5 ml-auto section-title">
                         <span class="sub-title mb-2 d-block">Tentang Kami</span>
@@ -159,7 +159,7 @@
                                     <div class="service h-100">
                                         <h4 class="text-primary">{{ $d->ProdukNama }}</h4>
                                         <img src="{{url('storage/' . $d->ProdukFoto) }}" class="img img-fluid img-thumbnail mids value-img" style="height:275px"
-                                        data-action="zoom" data-original="{{$d->ProdukFoto}}">
+                                        data-action="zoom" data-original="{{url('storage/' . $d->ProdukFoto) }}">
                                         <h6>&nbsp; Rp. {{number_format($d->ProdukHarga, 0, '','.')}}</h6>
                                         <p class="text-center">{{ $d->ProdukDesc }}.</p>
                                     </div>

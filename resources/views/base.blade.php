@@ -68,7 +68,9 @@
     <script>
         new Zooming().listen('img')
         $(document).ready(function() {
-            $('#dtb').DataTable();
+            $('#dtb').DataTable({
+                responsive: true
+            });
         });
     </script>
 

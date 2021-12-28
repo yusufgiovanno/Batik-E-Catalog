@@ -33,9 +33,8 @@ class ProdukController extends Controller
     public function index()
     {
         $datas = produk::where('ProdukStatus', 1)
-        ->orderBy('ProdukWP', 'DESC')
         ->orderBy('updated_at', 'DESC')
-        ->paginate(6);
+        ->paginate(24);
 
         return view('index', [
             'datas' => $datas
