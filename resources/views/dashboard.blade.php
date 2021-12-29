@@ -46,17 +46,17 @@
         <div class="card-columns">
             <div class="card bg-light">
                 <div class="card-body text-center">
-                    <a href="/produk"><i class="fas fa-cube"></i> Produk</a>
+                    <a href="/produk"><i class="icon-cube"></i> Produk</a>
                 </div>
             </div>
             <div class="card bg-light">
                 <div class="card-body text-center">
-                    <a href="#" data-toggle="modal" data-target="#myModal"><i class="fas fa-key"></i> Ubah Password</a>
+                    <a href="#" data-toggle="modal" data-target="#myModal"><i class="icon-key"></i> Ubah Password</a>
                 </div>
             </div>
             <div class="card bg-light">
                 <div class="card-body text-center">
-                    <a href="/settings"><i class="fas fa-gear"></i> Pengaturan</a>
+                    <a href="/settings"><i class="icon-gear"></i> Pengaturan</a>
                 </div>
             </div>
         </div>
