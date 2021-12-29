@@ -185,7 +185,7 @@
                                         </a></div>
 
                                     <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                                        <li><a class="nav-link" data-toggle="modal"
+                                        <li><a href="#" class="nav-link" data-toggle="modal"
                                                 data-target="#myModal">Masuk</a></li>
                                         <li><a href="#home-section" class="nav-link">Beranda</a></li>
                                         <li><a href="#about-section" class="nav-link">Tentang Kami</a></li>
