@@ -22,11 +22,11 @@
                         @csrf
                         <div class="container" style="width:70%">
                             <label>Password Lama</label>
-                            <input type="text" class="form-control" name="p1">
+                            <input type="password" class="form-control" name="p1">
                             <label>Password Baru</label>
-                            <input type="text" class="form-control" name="p2">
+                            <input type="password" class="form-control" name="p2">
                             <label>Password Baru (Konfirmasi)</label>
-                            <input type="text" class="form-control" name="p3">
+                            <input type="password" class="form-control" name="p3">
                         </div>
                     </div>
 

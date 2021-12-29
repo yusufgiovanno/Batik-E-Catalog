@@ -1,5 +1,9 @@
+    <?php
+    use Illuminate\Support\Facades\Session;
+    ?>
 <!DOCTYPE html>
 <html lang="en">
+
 
 <head>
     <title>Zakiyah Batik</title>
@@ -185,8 +189,12 @@
                                         </a></div>
 
                                     <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
+                                        @if(Session::get('status'))
+                                        <li><a href="/dashboard" class="nav-link">Dashboard</a></li>
+                                        @else
                                         <li><a href="#" class="nav-link" data-toggle="modal"
                                                 data-target="#myModal">Masuk</a></li>
+                                        @endif
                                         <li><a href="#home-section" class="nav-link">Beranda</a></li>
                                         <li><a href="#about-section" class="nav-link">Tentang Kami</a></li>
                                         <li><a href="#what-we-do-section" class="nav-link">Katalog</a></li>
