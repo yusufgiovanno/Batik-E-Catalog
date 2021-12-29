@@ -118,36 +118,41 @@
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
+    @if (\Session::has('info'))
+        <script>
+            alert('{{ Session::get('info') }}')
+        </script>
+    @endif
     <!-- The Modal -->
-<div class="modal" id="myModal">
-    <form method="post" action="/login">
-    <div class="modal-dialog">
-      <div class="modal-content">
+    <div class="modal" id="myModal">
+        <form method="post" action="/login">
+            <div class="modal-dialog">
+                <div class="modal-content">
 
-        <div class="modal-header">
-          <h4 class="modal-title">Masuk</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Masuk</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
 
-        <div class="modal-body">
-            @csrf
-            <div class="container">
-                <label>Username</label>
-                <input type="text" class="form-control" name="username">
-                <label>Password</label>
-                <input type="password" class="form-control" name="password">
+                    <div class="modal-body">
+                        @csrf
+                        <div class="container">
+                            <label>Username</label>
+                            <input type="text" class="form-control" name="username">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn rounded-0 btn-danger" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn rounded-0 btn-primary">Masuk</button>
+                    </div>
+
+                </div>
             </div>
-        </div>
-
-        <div class="modal-footer d-flex justify-content-center">
-            <button type="button" class="btn rounded-0 btn-danger" data-dismiss="modal">Batal</button>
-            <button type="submit" class="btn rounded-0 btn-primary">Masuk</button>
-        </div>
-
-      </div>
+        </form>
     </div>
-</form>
-  </div>
 
     <div class="site-wrap">
 
@@ -180,7 +185,8 @@
                                         </a></div>
 
                                     <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
-                                        <li><a class="nav-link" data-toggle="modal" data-target="#myModal">Masuk</a></li>
+                                        <li><a class="nav-link" data-toggle="modal"
+                                                data-target="#myModal">Masuk</a></li>
                                         <li><a href="#home-section" class="nav-link">Beranda</a></li>
                                         <li><a href="#about-section" class="nav-link">Tentang Kami</a></li>
                                         <li><a href="#what-we-do-section" class="nav-link">Katalog</a></li>
@@ -249,8 +255,9 @@
                                     </ul>
                                 </div>
                                 <div class="col-md-9">
-                                    <iframe src="https://www.youtube.com/embed/{{$set->Video}}" frameborder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe src="https://www.youtube.com/embed/{{ $set->Video }}" frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
@@ -288,11 +295,14 @@
                     </div>
                     <div class="col-lg-6 section-title">
                         <input type="text" class="form-control bg-white" placeholder="Pencarian .."
-                            style="margin-top:25px;">
+                            style="margin-top:25px;" onkeyup="filter()" id="search">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 ml-auto">
+                        <div class="row" id="gallery">
+                        </div>
+                        <h4 class="text-center text-primary">Gallery</h4>
                         <div class="row">
                             @foreach ($datas as $d)
                                 <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
@@ -513,6 +523,20 @@
                 ),
                 sticker()
         });
+
+        function filter() {
+            key = $("#search").val();
+            $.ajax({
+                url: "/filter",
+                type: "GET",
+                data: {
+                    'key': key,
+                },
+                success: function(data) {
+                    $('#gallery').html(data);
+                }
+            });
+        }
     </script>
 
 

@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Setting;
+use Illuminate\Support\Facades\Session;
 
 class SettingController extends Controller
 {
+    public function dashboard(){
+        if(!Session::get('status')) {return redirect('/');}
+        return view('dashboard');
+    }
+
     public function index()
     {
+        if(!Session::get('status')) {return redirect('/');}
         $data = Setting::find(1);
 
         return view('setting', ['data' => $data]);

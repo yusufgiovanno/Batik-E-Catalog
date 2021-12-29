@@ -17,6 +17,7 @@
 
                             <ul class="site-menu main-menu js-clone-nav d-none d-lg-none">
                                 <li><a href="/" class="nav-link">Beranda</a></li>
+                                <li><a href="/dashboard" class="nav-link">Dashboard</a></li>
                                 <li><a href="/produk" class="nav-link">Produk</a></li>
                                 <li><a href="/settings" class="nav-link">Pengaturan</a></li>
                                 <li><a href="/logout" class="nav-link">Keluar</a></li>
