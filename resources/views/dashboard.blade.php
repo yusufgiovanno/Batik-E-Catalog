@@ -60,5 +60,10 @@
                 </div>
             </div>
         </div>
+        <div class="card bg-light">
+            <div class="card-body text-center">
+                <a href="/logout" class="text-danger"><i class="icon-power-off"></i> Keluar</a>
+            </div>
+        </div>
     </div>
 @endsection
