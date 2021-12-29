@@ -77,18 +77,18 @@
                         <td>Rp. {{ number_format($d->ProdukHarga, 0, '', '.') }}</td>
                         <td>
                             @if ($d->ProdukStatus == 0)
-                                <i class="fas fa-archive text-secondary"></i>
+                                <i class="icon-archive text-secondary"></i>
                             @elseif ($d->ProdukStatus == 1)
-                                <i class="fas fa-eye text-success"></i>
+                                <i class="icon-eye text-success"></i>
                             @else
-                                <i class="fas fa-eye-slash text-danger"></i>
+                                <i class="icon-eye-slash text-danger"></i>
                             @endif
                         </td>
                         <td>{{ $d->ProdukWP }}</td>
                         <td>
-                            <button type="button" class="btn" onclick="edits({{ $d->id }})" data-toggle="modal" data-target="#myModal"><i class="fas fa-edit"></i></button>|
-                            <a href="{{$d->ProdukStatus ==  1 ? '#' : '/produk-publish?id='. $d->id }}"><i class="fas fa-eye text-success"></i></a> |
-                            <a href="{{$d->ProdukStatus ==  2 ? '#' : '/produk-archive?id='. $d->id }}"><i class="fas fa-eye-slash text-danger"></i></a>
+                            <button type="button" class="btn" onclick="edits({{ $d->id }})" data-toggle="modal" data-target="#myModal"><i class="icon-edit"></i></button>|
+                            <a href="{{$d->ProdukStatus ==  1 ? '#' : '/produk-publish?id='. $d->id }}"><i class="icon-eye text-success"></i></a> |
+                            <a href="{{$d->ProdukStatus ==  2 ? '#' : '/produk-archive?id='. $d->id }}"><i class="icon-eye-slash text-danger"></i></a>
                         </td>
                     </tr>
                 @endforeach
