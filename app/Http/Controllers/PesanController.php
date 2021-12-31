@@ -10,7 +10,7 @@ class PesanController extends Controller
 {
     public function index()
     {
-        //
+        return pesan::all();
     }
 
     public function create()

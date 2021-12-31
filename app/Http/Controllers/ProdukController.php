@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateprodukRequest;
 use App\Models\produk;
 use App\Models\Setting;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ProdukController extends Controller
 {
@@ -18,7 +19,7 @@ class ProdukController extends Controller
         $html = '';
         if ($r->key != null){
         $datas = produk::select('*')
-            ->Where('ProdukNama', 'LIKE', '%' . $r->key . '%')
+            ->where(DB::raw('lower(ProdukNama)'), 'like', '%' . strtolower($r->key) . '%')
             ->Where('ProdukStatus', 1)
             ->orderBy('updated_at')
             ->get();

@@ -20,6 +20,7 @@ use App\Http\Controllers\SettingController;
 
 Route::get ('/',               [ProdukController::class, 'index'  ]);
 Route::post('/pesan',          [PesanController::class,  'store'  ]);
+Route::get ('/inbox',          [PesanController::class,  'index'  ]);
 
 Route::get ('/produk',         [ProdukController::class, 'create' ]);
 Route::get ('/filter',         [ProdukController::class, 'filter' ]);
