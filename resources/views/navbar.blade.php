@@ -3,8 +3,10 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-6 col-md-4">
-                    <h1 class="my-0 site-logo"><a href="/dashboard">Admin<span class="text-primary">.</span>
-                        </a></h1>
+                    <!--<h1 class="my-0 site-logo"><a href="/dashboard">Zakiyah Batik<span class="text-primary">.</span>
+                        </a></h1>-->
+                    <h1 href="/dashboard" style="font-family:Snell Roundhand, cursive;color:#964b00">Zakiyah Batik<span></span>
+                        </h1>
                 </div>
                 <div class="col-6 col-md-8">
                     <nav class="site-navigation text-right" role="navigation">

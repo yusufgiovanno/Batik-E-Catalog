@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UpdateprodukRequest;
 use App\Models\produk;
 use App\Models\Setting;
+use App\Models\kategori;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -15,18 +16,20 @@ class ProdukController extends Controller
 {
     public function filter(Request $r)
     {
-        //return dd($r->key);
         $html = '';
-        if ($r->key != null){
-        $datas = produk::select('*')
-            ->where(DB::raw('lower(ProdukNama)'), 'like', '%' . strtolower($r->key) . '%')
-            ->Where('ProdukStatus', 1)
-            ->orderBy('updated_at')
-            ->get();
-        } else {
-            return $html;
-        }
 
+        $data = produk::select('*')
+            ->Where('ProdukStatus', 1);
+        if ($r->key) {
+            $data->where(DB::raw('lower(ProdukNama)'), 'like', '%' . strtolower($r->key) . '%');
+        }
+        if ($r->kat) {
+            $data->where('KategoriId', $r->kat);
+        }
+        if ($r->sex) {
+            $data->where('Gender', $r->sex);
+        }
+        $datas = $data->orderBy('updated_at')->get();
 
         foreach ($datas as $d) {
             $html .= '
@@ -51,6 +54,7 @@ class ProdukController extends Controller
             ';
         }
 
+        //return dd($r->input());
         return $html;
     }
 
@@ -83,10 +87,12 @@ class ProdukController extends Controller
             ->paginate(24);
 
         $set = Setting::find(1);
+        $kat = kategori::orderBy('id', 'DESC')->get();
 
         return view('index', [
             'datas' => $datas,
-            'set'   => $set
+            'set'   => $set,
+            'kat'   => $kat
         ]);
     }
 
@@ -96,21 +102,29 @@ class ProdukController extends Controller
             return redirect('/');
         }
         $datas = produk::orderBy('id', 'DESC')->get();
+        $kat = kategori::orderBy('id', 'DESC')->get();
 
+        //return $datas;
         return view('produk', [
-            'datas' => $datas
+            'datas' => $datas,
+            'kat' => $kat
+
         ]);
     }
 
     public function store(StoreprodukRequest $r)
     {
+        //return dd($r->all());
         $prod = new produk();
 
         $prod->ProdukNama   = $r->nama;
         $prod->ProdukHarga  = $r->harga;
         $prod->ProdukDesc   = $r->desc;
         $prod->ProdukKode   = $r->kode;
+        $prod->KategoriId   = $r->kategori;
+        $prod->Gender       = $r->katGender;
         $prod->ProdukStatus = 0;
+        $prod->save();
 
         if (isset($r->foto)) {
             $prod->ProdukFoto = 'Produk/' . $prod->id . '.jpg';
@@ -130,6 +144,8 @@ class ProdukController extends Controller
         $prod->ProdukHarga  = $r->harga;
         $prod->ProdukDesc   = $r->desc;
         $prod->ProdukKode   = $r->kode;
+        $prod->KategoriId   = $r->kategori;
+        $prod->Gender       = $r->katGender;
 
         if (isset($r->foto)) {
             $prod->ProdukFoto = 'Produk/' . $prod->id . '.jpg';
@@ -137,6 +153,35 @@ class ProdukController extends Controller
         }
 
         $prod->save();
+
+        return redirect('/produk');
+    }
+
+    public function storeKat(Request $r)
+    {
+        //return $r->input();
+
+        $data = new kategori();
+        $data->Kategori = $r->kats;
+        $data->save();
+
+        return redirect('/produk');
+    }
+
+    public function updateKat(Request $r)
+    {
+        //return $r->input();
+
+        $data = kategori::find($r->idk);
+        $data->Kategori = $r->kats;
+        $data->save();
+
+        return redirect('/produk');
+    }
+
+    public function deleteKat($id)
+    {
+        kategori::find($id)->delete();
 
         return redirect('/produk');
     }

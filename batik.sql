@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 29, 2021 at 09:34 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.4.26
+-- Host: 10.11.3.130:3306
+-- Generation Time: Feb 14, 2022 at 09:37 PM
+-- Server version: 10.3.32-MariaDB-1:10.3.32+maria~focal
+-- PHP Version: 7.3.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,8 +19,31 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `batik`
+-- Database: `zakiyahb_atik`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kategoris`
+--
+
+CREATE TABLE `kategoris` (
+  `id` int(11) NOT NULL,
+  `Kategori` varchar(30) COLLATE latin1_bin NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Dumping data for table `kategoris`
+--
+
+INSERT INTO `kategoris` (`id`, `Kategori`, `created_at`, `updated_at`) VALUES
+(1, 'Kemeja', '2022-01-30 21:13:39', '2022-01-28 16:01:22'),
+(2, 'Jaket', '2022-01-30 21:14:04', '2022-01-28 16:14:15'),
+(3, 'Kain', '2022-01-30 22:19:26', '2022-01-30 15:18:52'),
+(4, 'Sarung', '2022-01-30 15:18:52', '2022-01-30 15:18:52');
 
 -- --------------------------------------------------------
 
@@ -93,32 +117,23 @@ CREATE TABLE `produks` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `ProdukKode` text COLLATE latin1_bin NOT NULL,
+  `ProdukKode` text COLLATE latin1_bin DEFAULT NULL,
   `ProdukNama` text COLLATE latin1_bin DEFAULT NULL,
   `ProdukFoto` text COLLATE latin1_bin DEFAULT NULL,
   `ProdukDesc` text COLLATE latin1_bin DEFAULT NULL,
   `ProdukHarga` text COLLATE latin1_bin DEFAULT NULL,
   `ProdukStatus` tinyint(4) NOT NULL,
-  `ProdukWP` date DEFAULT NULL
+  `ProdukWP` date DEFAULT NULL,
+  `Gender` varchar(10) COLLATE latin1_bin NOT NULL,
+  `KategoriId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
 --
 -- Dumping data for table `produks`
 --
 
-INSERT INTO `produks` (`id`, `created_at`, `updated_at`, `ProdukKode`, `ProdukNama`, `ProdukFoto`, `ProdukDesc`, `ProdukHarga`, `ProdukStatus`, `ProdukWP`) VALUES
-(1, NULL, '2021-12-27 07:26:57', 'B01', 'Batik Sogan', 'Produk/1.jpg', 'Batik Yang Dibuat Dengan Bahan Batik Berkualitas', '25000', 2, '2021-12-27'),
-(2, NULL, '2021-12-28 04:40:06', 'B02', 'Batik Parang', 'Produk/2.jpg', 'Batik Yang Dibuat Dengan Bahan Batik', '15000', 1, '2021-12-28'),
-(3, NULL, '2021-12-27 07:23:49', 'B03', 'Batik Kawung', 'Produk/3.jpg', 'Batik Yang Dibuat Dengan Bahan Batik', '15000', 1, '2021-12-27'),
-(4, NULL, '2021-12-26 08:56:35', 'B04', 'Batik Sekar Jagad', 'Produk/4.jpg', 'Batik Yang Dibuat Dengan Bahan Batik', '15000', 1, '2021-12-26'),
-(5, NULL, '2021-12-26 08:56:36', 'B05', 'Batik Truntum', 'Produk/5.jpg', 'Batik Yang Dibuat Dengan Bahan Batik', '15000', 1, '2021-12-26'),
-(6, NULL, '2021-12-26 08:56:38', 'B06', 'Batik Sido Asih', 'Produk/6.jpg', 'Batik Yang Dibuat Dengan Bahan Batik', '123456', 1, '2021-12-26'),
-(7, NULL, '2021-12-26 08:56:39', 'B07', 'Batik Buketan', 'Produk/7.jpg', 'Batik Yang Dibuat Dengan Bahan Batik', '123000', 1, '2021-12-26'),
-(8, NULL, '2021-12-26 08:56:42', 'B08', 'Batik Ulamsari Mas', 'Produk/8.jpg', 'Batik Yang Dibuat Dengan Bahan Batik', '145000', 1, '2021-12-26'),
-(9, NULL, '2021-12-28 04:39:02', 'B09', 'Batik Gentongan', 'Produk/9.jpg', 'Batik Yang Dibuat Dengan Bahan Batik  Berkualitas Tinggi', '135000', 1, '2021-12-26'),
-(10, '2021-12-27 07:30:12', '2021-12-28 05:12:15', 'B10', 'Batik Mega Mendung', 'Produk/10.jpg', 'Batik Yang Dibuat Dengan Bahan Batik Berkualitas', '13500', 1, '2021-12-28'),
-(11, '2021-12-28 04:37:06', '2021-12-28 05:24:30', 'B11', 'Batik Sogan', 'Produk/11.jpg', 'Batik Yang Dibuat Dengan Bahan Batik', '250000', 2, '2021-12-28'),
-(12, '2021-12-28 23:46:08', '2021-12-29 00:54:15', 'B11', 'Batik Swastika', 'Produk/.jpg', 'Batik Yang Dibuat Dengan Bahan Batik  Berkualitas Tinggi', '30000', 1, '2021-12-29');
+INSERT INTO `produks` (`id`, `created_at`, `updated_at`, `ProdukKode`, `ProdukNama`, `ProdukFoto`, `ProdukDesc`, `ProdukHarga`, `ProdukStatus`, `ProdukWP`, `Gender`, `KategoriId`) VALUES
+(36, '2022-02-09 08:34:41', '2022-02-09 08:36:15', 'B01', 'Batik Jaket', 'Produk/36.jpg', 'Jaket Batik Tulis Eksklusif, Bahan Kain Batik Tulis Gurik Premium, 1 motif hanya untuk 1 ukuran jaket, tidak ada seri', '400000', 1, '2022-02-09', 'Laki-laki', 2);
 
 -- --------------------------------------------------------
 
@@ -131,17 +146,23 @@ CREATE TABLE `Settings` (
   `Tentang` text COLLATE latin1_bin NOT NULL,
   `Instagram` text COLLATE latin1_bin NOT NULL,
   `LinkInstagram` text COLLATE latin1_bin NOT NULL,
+  `Instagram2` text COLLATE latin1_bin NOT NULL,
+  `LinkInstagram2` text COLLATE latin1_bin NOT NULL,
   `Facebook` text COLLATE latin1_bin NOT NULL,
   `LinkFacebook` text COLLATE latin1_bin NOT NULL,
-  `Video` text COLLATE latin1_bin NOT NULL
+  `Video` text COLLATE latin1_bin NOT NULL,
+  `Slide1` text COLLATE latin1_bin DEFAULT NULL,
+  `Slide2` text COLLATE latin1_bin DEFAULT NULL,
+  `Slide3` text COLLATE latin1_bin DEFAULT NULL,
+  `Slide4` text COLLATE latin1_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
 --
 -- Dumping data for table `Settings`
 --
 
-INSERT INTO `Settings` (`id`, `Tentang`, `Instagram`, `LinkInstagram`, `Facebook`, `LinkFacebook`, `Video`) VALUES
-(1, 'Menyediakan berbagai macam kain batik khas Madura dengan kualitas tinggi.', 'Zakiyah Batik', 'https://www.instagram.com/zakiyahbatik', 'Zakiyah Batik', 'https://www.instagram.com/zakiyahbatik', 'TA4WfYHAmZk');
+INSERT INTO `Settings` (`id`, `Tentang`, `Instagram`, `LinkInstagram`, `Instagram2`, `LinkInstagram2`, `Facebook`, `LinkFacebook`, `Video`, `Slide1`, `Slide2`, `Slide3`, `Slide4`) VALUES
+(1, 'Kami adalah UMKM yang bergerak di bidang Fashion Batik. Kami memproduksi kain Batik Tulis Madura dan Batik Khas motif Malang. Kami menerima pembuatan batik secara custom untuk instansi atau lembaga apapun dan dimanapun di seluruh Indonesia. \r\n\r\nSelain memproduksi Kain Batik Tulis, kami juga memproduksi daster batik, blouse, hem dan jaket batik tulis..', '@supplierbatikmadura', 'https://www.instagram.com/supplierbatikmadura/', '@BatikTopekMalangan', 'https://www.instagram.com/batiktopengmalangan', '@zakiyahbatik', 'https://www.instagram.com/zakiyahbatik', '5YseHCxq7hY', '1NtpgL.jpg', '2BFt8l.jpg', '3BFt8l.jpg', '4BFt8l.jpg');
 
 -- --------------------------------------------------------
 
@@ -160,11 +181,17 @@ CREATE TABLE `User` (
 --
 
 INSERT INTO `User` (`id`, `Username`, `Password`) VALUES
-(1, 'admin', 'ab56b4d92b40713acc5af89985d4b786');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `kategoris`
+--
+ALTER TABLE `kategoris`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -190,23 +217,18 @@ ALTER TABLE `pesans`
 -- Indexes for table `produks`
 --
 ALTER TABLE `produks`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `Settings`
---
-ALTER TABLE `Settings`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `User`
---
-ALTER TABLE `User`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `KategoriId` (`KategoriId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `kategoris`
+--
+ALTER TABLE `kategoris`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -230,19 +252,17 @@ ALTER TABLE `pesans`
 -- AUTO_INCREMENT for table `produks`
 --
 ALTER TABLE `produks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- AUTO_INCREMENT for table `Settings`
+-- Constraints for dumped tables
 --
-ALTER TABLE `Settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `User`
+-- Constraints for table `produks`
 --
-ALTER TABLE `User`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `produks`
+  ADD CONSTRAINT `produks_ibfk_1` FOREIGN KEY (`KategoriId`) REFERENCES `kategoris` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
